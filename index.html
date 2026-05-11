@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ongoing Research | TTUHSC Internal Medicine Residency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Serif+4:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============================================
+     TTUHSC Research Tracker
+     Brand: Texas Tech University Health Sciences Center
+     Primary: TTU Red #CC0000 | Black | Clinical white
+     ============================================ */
+  :root {
+    /* TTUHSC Brand */
+    --ttu-red: #CC0000;
+    --ttu-red-dark: #990000;
+    --ttu-red-soft: #FCE8E8;
+    --ttu-black: #000000;
+    --ink-900: #1a1a1a;
+    --ink-700: #404040;
+    --ink-500: #6b6b6b;
+    --ink-400: #9a9a9a;
+    --ink-300: #c4c4c4;
+    --bg-white: #ffffff;
+    --bg-page: #fafafa;
+    --bg-row-hover: #f5f5f5;
+    --rule: #e5e5e5;
+    --rule-strong: #cccccc;
+
+    /* Stage colors (color-coded by status) */
+    --stage-hypothesis: #5B6BBF;     /* Blue - planning */
+    --stage-hypothesis-bg: #E8EBFF;
+    --stage-recruiting: #E8A317;     /* Yellow - active recruiting */
+    --stage-recruiting-bg: #FFF4D6;
+    --stage-collecting: #E07B2C;     /* Orange - in progress */
+    --stage-collecting-bg: #FFE5D0;
+    --stage-analysis: #8B4789;       /* Purple - analyzing */
+    --stage-analysis-bg: #F3E5F3;
+    --stage-published: #2D7D32;      /* Green - completed */
+    --stage-published-bg: #DFF0E0;
+
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg-page);
+    color: var(--ink-900);
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 14px;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
+
+  /* ============ HEADER ============ */
+  header {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 3px solid var(--ttu-black);
+    position: relative;
+  }
+
+  /* TTU red accent line */
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 120px;
+    height: 3px;
+    background: var(--ttu-red);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ttu-red);
+    margin-bottom: 12px;
+  }
+
+  .eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 2px;
+    background: var(--ttu-red);
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink-900);
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    color: var(--ink-500);
+    font-size: 15px;
+    max-width: 700px;
+  }
+
+  .header-meta {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+    font-size: 11px;
+    color: var(--ink-400);
+    letter-spacing: 0.05em;
+  }
+
+  .header-meta strong {
+    display: block;
+    color: var(--ink-700);
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  /* ============ STATS BAR ============ */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    background: var(--bg-white);
+    border: 1px solid var(--rule);
+    margin-bottom: 28px;
+  }
+
+  .stat {
+    padding: 16px 20px;
+    border-right: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-500);
+    margin-bottom: 6px;
+  }
+
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ink-900);
+    line-height: 1;
+  }
+
+  .stat-value .unit {
+    font-size: 12px;
+    font-family: var(--font-body);
+    font-weight: 400;
+    color: var(--ink-400);
+    margin-left: 6px;
+  }
+
+  .stat.accent .stat-value { color: var(--ttu-red); }
+
+  /* ============ FILTER BAR ============ */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 28px;
+    padding: 14px 16px;
+    background: var(--bg-white);
+    border: 1px solid var(--rule);
+  }
+
+  .filter-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-500);
+    margin-right: 4px;
+  }
+
+  .filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: var(--bg-page);
+    border: 1px solid var(--rule);
+    font-size: 13px;
+    color: var(--ink-700);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+  }
+
+  .filter-chip:hover {
+    border-color: var(--ttu-red);
+    color: var(--ttu-red);
+  }
+
+  .filter-chip.active {
+    background: var(--ttu-black);
+    border-color: var(--ttu-black);
+    color: var(--bg-white);
+    font-weight: 500;
+  }
+
+  .filter-chip .count {
+    font-size: 11px;
+    opacity: 0.7;
+  }
+
+  .filter-search {
+    flex: 1;
+    min-width: 200px;
+    max-width: 300px;
+    margin-left: auto;
+  }
+
+  .filter-search input {
+    width: 100%;
+    padding: 7px 12px;
+    background: var(--bg-page);
+    border: 1px solid var(--rule);
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--ink-900);
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+
+  .filter-search input:focus {
+    border-color: var(--ttu-red);
+  }
+
+  .filter-search input::placeholder {
+    color: var(--ink-400);
+  }
+
+  /* ============ CATEGORY SECTION ============ */
+  .category {
+    margin-bottom: 36px;
+    scroll-margin-top: 20px;
+  }
+
+  .category.hidden { display: none; }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+    padding: 12px 16px;
+    background: var(--ttu-black);
+    color: var(--bg-white);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .category-toggle {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+    font-size: 10px;
+  }
+
+  .category.collapsed .category-toggle {
+    transform: rotate(-90deg);
+  }
+
+  .category.collapsed .research-table {
+    display: none;
+  }
+
+  .category-number {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ttu-red);
+    letter-spacing: 0.05em;
+    min-width: 32px;
+  }
+
+  .category-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    flex: 1;
+  }
+
+  .category-count {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* ============ RESEARCH TABLE ============ */
+  .research-table {
+    background: var(--bg-white);
+    border: 1px solid var(--rule);
+    border-top: none;
+    overflow: hidden;
+  }
+
+  .table-head {
+    display: grid;
+    grid-template-columns: 50px minmax(280px, 1.4fr) 160px 140px 1fr;
+    background: var(--bg-page);
+    color: var(--ink-500);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .table-head > div { padding: 0 16px; }
+
+  .research-row {
+    display: grid;
+    grid-template-columns: 50px minmax(280px, 1.4fr) 160px 140px 1fr;
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.15s ease;
+    min-height: 76px;
+    align-items: center;
+  }
+
+  .research-row:last-child { border-bottom: none; }
+  .research-row:hover { background: var(--bg-row-hover); }
+  .research-row.hidden { display: none; }
+  .research-row > div { padding: 14px 16px; }
+
+  .row-number {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--ink-300);
+    font-weight: 500;
+  }
+
+  .research-title {
+    font-weight: 600;
+    color: var(--ink-900);
+    line-height: 1.35;
+    margin-bottom: 3px;
+    font-size: 14px;
+  }
+
+  .research-meta {
+    font-size: 12px;
+    color: var(--ink-500);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .research-meta .pi {
+    color: var(--ttu-red);
+    font-weight: 500;
+  }
+
+  .research-meta .separator {
+    color: var(--ink-300);
+  }
+
+  .research-meta a {
+    color: var(--ttu-red);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .research-meta a:hover {
+    text-decoration: underline;
+  }
+
+  .research-meta a::after {
+    content: '↗';
+    font-size: 11px;
+  }
+
+  /* Status badge */
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 2px;
+  }
+
+  .status::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .status-hypothesis { background: var(--stage-hypothesis-bg); color: var(--stage-hypothesis); }
+  .status-recruiting { background: var(--stage-recruiting-bg); color: var(--stage-recruiting); }
+  .status-collecting { background: var(--stage-collecting-bg); color: var(--stage-collecting); }
+  .status-analysis { background: var(--stage-analysis-bg); color: var(--stage-analysis); }
+  .status-published { background: var(--stage-published-bg); color: var(--stage-published); }
+
+  /* ============ TIMELINE (Stage Pipeline) ============ */
+  .timeline-cell {
+    padding: 14px 16px;
+  }
+
+  .timeline {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 36px;
+  }
+
+  /* Background bar */
+  .timeline-track {
+    position: absolute;
+    inset: 50% 4px auto 4px;
+    height: 3px;
+    background: var(--rule);
+    transform: translateY(-50%);
+    border-radius: 2px;
+  }
+
+  /* Progress (colored) bar */
+  .timeline-progress {
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    height: 3px;
+    transform: translateY(-50%);
+    border-radius: 2px;
+    transition: width 0.6s ease, background 0.3s ease;
+  }
+
+  .stages {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    z-index: 2;
+  }
+
+  .stage {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: help;
+  }
+
+  .stage-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bg-white);
+    border: 2px solid var(--rule-strong);
+    transition: all 0.2s ease;
+  }
+
+  .stage.done .stage-dot {
+    background: var(--ink-700);
+    border-color: var(--ink-700);
+  }
+
+  .stage.current .stage-dot {
+    width: 16px;
+    height: 16px;
+    border: 3px solid currentColor;
+    background: var(--bg-white);
+    box-shadow: 0 0 0 4px rgba(204, 0, 0, 0.12);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  /* Current stage color depends on status */
+  .stage.current.s-hypothesis { color: var(--stage-hypothesis); }
+  .stage.current.s-recruiting { color: var(--stage-recruiting); }
+  .stage.current.s-collecting { color: var(--stage-collecting); }
+  .stage.current.s-analysis   { color: var(--stage-analysis); }
+  .stage.current.s-published  { color: var(--stage-published); }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.08); }
+    50% { box-shadow: 0 0 0 7px rgba(0, 0, 0, 0.04); }
+  }
+
+  .stage-label {
+    position: absolute;
+    top: 24px;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .stage.current .stage-label {
+    color: var(--ink-900);
+    font-weight: 700;
+  }
+
+  .stage.done .stage-label {
+    color: var(--ink-700);
+  }
+
+  /* Tooltip */
+  .stage-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background: var(--ink-900);
+    color: var(--bg-white);
+    padding: 5px 10px;
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    margin-bottom: 6px;
+    border-radius: 2px;
+  }
+
+  .stage:hover .stage-tooltip {
+    opacity: 1;
+    transform: translate(-50%, -4px);
+  }
+
+  /* ============ EMPTY / LOADING / ERROR STATES ============ */
+  .state {
+    padding: 48px 24px;
+    text-align: center;
+    background: var(--bg-white);
+    border: 1px dashed var(--rule-strong);
+  }
+
+  .state-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+    opacity: 0.4;
+  }
+
+  .state-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink-700);
+    margin-bottom: 6px;
+  }
+
+  .state-message {
+    color: var(--ink-500);
+    font-size: 13px;
+  }
+
+  .state.error { border-color: var(--ttu-red); background: var(--ttu-red-soft); }
+  .state.error .state-title { color: var(--ttu-red-dark); }
+
+  /* Loading spinner */
+  .spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--rule);
+    border-top-color: var(--ttu-red);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 12px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ============ FOOTER ============ */
+  footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 11px;
+    color: var(--ink-400);
+  }
+
+  footer strong {
+    color: var(--ink-700);
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    .container { padding: 20px 16px; }
+    h1 { font-size: 28px; }
+    .header-meta { position: static; text-align: left; margin-top: 12px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat { border-right: none; border-bottom: 1px solid var(--rule); }
+    .filter-search { margin-left: 0; max-width: 100%; }
+    .table-head, .research-row {
+      grid-template-columns: 40px 1fr;
+    }
+    .table-head .col-status,
+    .table-head .col-progress,
+    .table-head .col-timeline { display: none; }
+    .research-row .status-cell,
+    .research-row .progress-cell,
+    .research-row .timeline-cell {
+      grid-column: 1 / -1;
+      padding-top: 0;
+    }
+    .row-number { padding: 14px 16px 4px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ============ HEADER ============ -->
+  <header>
+    <div class="eyebrow">TTUHSC Internal Medicine Residency</div>
+    <h1>List of Ongoing Research</h1>
+    <p class="subtitle">Active clinical research studies conducted by our residents and faculty, organized by specialty.</p>
+    <div class="header-meta">
+      <strong>Last Updated</strong>
+      <span id="lastUpdated">—</span>
+    </div>
+  </header>
+
+  <!-- ============ STATS ============ -->
+  <section class="stats" id="statsBar">
+    <div class="stat">
+      <div class="stat-label">Active Studies</div>
+      <div class="stat-value" id="statTotal">—</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Recruiting</div>
+      <div class="stat-value" id="statRecruiting">—</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Data Collection</div>
+      <div class="stat-value" id="statCollecting">—</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">In Analysis</div>
+      <div class="stat-value" id="statAnalysis">—</div>
+    </div>
+    <div class="stat accent">
+      <div class="stat-label">Published</div>
+      <div class="stat-value" id="statPublished">—</div>
+    </div>
+  </section>
+
+  <!-- ============ FILTER BAR ============ -->
+  <section class="filter-bar">
+    <span class="filter-label">Filter</span>
+    <div id="categoryChips" style="display:flex; gap:8px; flex-wrap:wrap;">
+      <span class="filter-chip active" data-category="all">All Categories</span>
+    </div>
+    <div class="filter-search">
+      <input type="text" id="searchInput" placeholder="Search by title or PI..." />
+    </div>
+  </section>
+
+  <!-- ============ DYNAMIC CONTENT ============ -->
+  <div id="content">
+    <div class="state" id="loadingState">
+      <div class="spinner"></div>
+      <div class="state-title">Loading research data...</div>
+      <div class="state-message">Fetching the latest information.</div>
+    </div>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div>© <span id="currentYear"></span> <strong>TTUHSC Internal Medicine Residency, Lubbock</strong></div>
+    <div>Data source: Google Sheets · Updates every 5 minutes</div>
+  </footer>
+
+</div>
+
+<script>
+  // ============================================
+  // CONFIGURATION
+  // ============================================
+  // Replace this with your deployed Google Apps Script Web App URL
+  // After you deploy GAS, paste the URL here:
+  const API_URL = 'https://script.google.com/macros/s/AKfycbwlJgR_lt2fESlnaNLUnTb3sldkuh8Lo17E1aSfFzC3mpdYgqS2Iymyo3ZOFASL8Q_E/exec';
+
+  // Demo mode: if API_URL not configured, use built-in sample data
+  const USE_DEMO_DATA = API_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+  // ============================================
+  // SAMPLE DATA (used when GAS is not yet connected)
+  // ============================================
+  const DEMO_DATA = {
+    lastUpdated: new Date().toISOString(),
+    stages: [
+      { id: 'hypothesis', name: 'Hypothesis', order: 1 },
+      { id: 'recruiting', name: 'Recruit', order: 2 },
+      { id: 'collecting', name: 'Collect', order: 3 },
+      { id: 'analysis',   name: 'Analysis', order: 4 },
+      { id: 'published',  name: 'Publish', order: 5 }
+    ],
+    categories: [
+      { id: 'cardiology', name: 'Cardiology', order: 1 },
+      { id: 'pulmonary',  name: 'Pulmonary', order: 2 },
+      { id: 'renal',      name: 'Renal', order: 3 }
+    ],
+    studies: [
+      {
+        id: 'ST001', category: 'cardiology', no: 1,
+        title: 'Diabetes Management in Heart Failure Patients (TUKTON Study)',
+        pi: 'Dr. Tukton', status: 'recruiting',
+        startDate: '2026-01-15', notes: '', publishedUrl: ''
+      },
+      {
+        id: 'ST002', category: 'cardiology', no: 2,
+        title: 'Diabetic Kidney Disease and Heart Failure Outcomes (KONG Study)',
+        pi: 'Dr. Kong', status: 'collecting',
+        startDate: '2025-11-01', notes: '', publishedUrl: ''
+      },
+      {
+        id: 'ST003', category: 'pulmonary', no: 1,
+        title: 'Canine-Assisted Pulmonary Rehabilitation (BEH Study)',
+        pi: 'Dr. Beh', status: 'published',
+        startDate: '2025-06-01', notes: '',
+        publishedUrl: 'https://pubmed.ncbi.nlm.nih.gov/'
+      }
+    ]
+  };
+
+  // ============================================
+  // STATE
+  // ============================================
+  let DATA = null;
+  let activeCategory = 'all';
+  let searchQuery = '';
+
+  // ============================================
+  // FETCH DATA
+  // ============================================
+  async function loadData() {
+    try {
+      if (USE_DEMO_DATA) {
+        // Use sample data for development/preview
+        await new Promise(r => setTimeout(r, 400)); // simulate network delay
+        DATA = DEMO_DATA;
+      } else {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error('Network response was not ok');
+        DATA = await response.json();
+      }
+      render();
+    } catch (err) {
+      showError(err.message);
+    }
+  }
+
+  // ============================================
+  // RENDER
+  // ============================================
+  function render() {
+    if (!DATA) return;
+
+    // Update timestamp
+    const updated = new Date(DATA.lastUpdated);
+    document.getElementById('lastUpdated').textContent = updated.toLocaleString('en-US', {
+      month: 'short', day: 'numeric', year: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    });
+
+    // Update stats
+    const studies = DATA.studies || [];
+    document.getElementById('statTotal').innerHTML =
+      `${String(studies.length).padStart(2,'0')}<span class="unit">total</span>`;
+    document.getElementById('statRecruiting').textContent =
+      String(studies.filter(s => s.status === 'recruiting').length).padStart(2,'0');
+    document.getElementById('statCollecting').textContent =
+      String(studies.filter(s => s.status === 'collecting').length).padStart(2,'0');
+    document.getElementById('statAnalysis').textContent =
+      String(studies.filter(s => s.status === 'analysis').length).padStart(2,'0');
+    document.getElementById('statPublished').textContent =
+      String(studies.filter(s => s.status === 'published').length).padStart(2,'0');
+
+    // Render category chips
+    renderCategoryChips();
+
+    // Render category sections
+    renderCategories();
+  }
+
+  function renderCategoryChips() {
+    const container = document.getElementById('categoryChips');
+    const studies = DATA.studies || [];
+    const categories = DATA.categories || [];
+
+    let html = `<span class="filter-chip ${activeCategory === 'all' ? 'active' : ''}" data-category="all">All Categories <span class="count">(${studies.length})</span></span>`;
+
+    categories.forEach(cat => {
+      const count = studies.filter(s => s.category === cat.id).length;
+      if (count === 0) return; // hide empty categories from filter
+      html += `<span class="filter-chip ${activeCategory === cat.id ? 'active' : ''}" data-category="${cat.id}">${cat.name} <span class="count">(${count})</span></span>`;
+    });
+
+    container.innerHTML = html;
+
+    // Bind clicks
+    container.querySelectorAll('.filter-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        activeCategory = chip.dataset.category;
+        renderCategoryChips();
+        renderCategories();
+      });
+    });
+  }
+
+  function renderCategories() {
+    const content = document.getElementById('content');
+    const categories = DATA.categories || [];
+    const studies = DATA.studies || [];
+    const stages = DATA.stages || [];
+
+    let html = '';
+    let displayedCount = 0;
+
+    categories.forEach((cat, idx) => {
+      // Filter check
+      if (activeCategory !== 'all' && activeCategory !== cat.id) return;
+
+      // Get studies for this category, filtered by search
+      const catStudies = studies
+        .filter(s => s.category === cat.id)
+        .filter(s => {
+          if (!searchQuery) return true;
+          const q = searchQuery.toLowerCase();
+          return s.title.toLowerCase().includes(q) ||
+                 (s.pi || '').toLowerCase().includes(q);
+        });
+
+      displayedCount += catStudies.length;
+
+      html += renderCategorySection(cat, catStudies, stages, idx + 1);
+    });
+
+    if (displayedCount === 0) {
+      html = `<div class="state">
+        <div class="state-icon">⌕</div>
+        <div class="state-title">No studies found</div>
+        <div class="state-message">Try adjusting your filter or search query.</div>
+      </div>`;
+    }
+
+    content.innerHTML = html;
+
+    // Bind category collapse
+    content.querySelectorAll('.category-header').forEach(header => {
+      header.addEventListener('click', () => {
+        header.parentElement.classList.toggle('collapsed');
+      });
+    });
+  }
+
+  function renderCategorySection(cat, catStudies, stages, num) {
+    const numStr = String(num).padStart(2, '0');
+
+    if (catStudies.length === 0) {
+      return `
+      <section class="category">
+        <div class="category-header">
+          <span class="category-toggle">▼</span>
+          <span class="category-number">§ ${numStr}</span>
+          <span class="category-title">${escapeHtml(cat.name)}</span>
+          <span class="category-count">No active studies</span>
+        </div>
+        <div class="research-table">
+          <div class="state">
+            <div class="state-title">Coming Soon</div>
+            <div class="state-message">Studies in this category will be added soon.</div>
+          </div>
+        </div>
+      </section>`;
+    }
+
+    let rows = '';
+    catStudies.forEach((study, idx) => {
+      rows += renderStudyRow(study, stages, idx + 1);
+    });
+
+    return `
+    <section class="category">
+      <div class="category-header">
+        <span class="category-toggle">▼</span>
+        <span class="category-number">§ ${numStr}</span>
+        <span class="category-title">${escapeHtml(cat.name)}</span>
+        <span class="category-count">${catStudies.length} ${catStudies.length === 1 ? 'study' : 'studies'}</span>
+      </div>
+      <div class="research-table">
+        <div class="table-head">
+          <div>No.</div>
+          <div>Study Title</div>
+          <div class="col-status">Status</div>
+          <div class="col-progress">Progress</div>
+          <div class="col-timeline">Pipeline</div>
+        </div>
+        ${rows}
+      </div>
+    </section>`;
+  }
+
+  function renderStudyRow(study, stages, num) {
+    const currentStageIdx = stages.findIndex(s => s.id === study.status);
+    const progress = currentStageIdx >= 0
+      ? Math.round((currentStageIdx / (stages.length - 1)) * 100)
+      : 0;
+
+    // Stage colors for progress bar
+    const stageColorMap = {
+      hypothesis: 'var(--stage-hypothesis)',
+      recruiting: 'var(--stage-recruiting)',
+      collecting: 'var(--stage-collecting)',
+      analysis: 'var(--stage-analysis)',
+      published: 'var(--stage-published)'
+    };
+    const progressColor = stageColorMap[study.status] || 'var(--ink-700)';
+
+    let stagesHtml = '';
+    stages.forEach((stage, idx) => {
+      let cls = '';
+      if (idx < currentStageIdx) cls = 'done';
+      else if (idx === currentStageIdx) cls = `current s-${stage.id}`;
+
+      stagesHtml += `
+        <div class="stage ${cls}">
+          <div class="stage-tooltip">${escapeHtml(stage.name)}</div>
+          <div class="stage-dot"></div>
+          <div class="stage-label">${escapeHtml(stage.name)}</div>
+        </div>`;
+    });
+
+    const statusLabel = stages.find(s => s.id === study.status)?.name || study.status;
+
+    // PI link or text
+    let piHtml = '';
+    if (study.pi) {
+      piHtml = `<span class="pi">${escapeHtml(study.pi)}</span>`;
+    }
+
+    // Published link
+    let pubLinkHtml = '';
+    if (study.status === 'published' && study.publishedUrl) {
+      pubLinkHtml = `<span class="separator">·</span><a href="${escapeHtml(study.publishedUrl)}" target="_blank" rel="noopener">View Publication</a>`;
+    }
+
+    return `
+    <div class="research-row" data-study-id="${escapeHtml(study.id)}">
+      <div class="row-number">${String(num).padStart(2,'0')}</div>
+      <div>
+        <div class="research-title">${escapeHtml(study.title)}</div>
+        <div class="research-meta">
+          ${piHtml}
+          ${pubLinkHtml}
+        </div>
+      </div>
+      <div class="status-cell">
+        <span class="status status-${study.status}">${escapeHtml(statusLabel)}</span>
+      </div>
+      <div class="progress-cell">
+        <div style="font-family:var(--font-display); font-size:18px; font-weight:600; color:${progressColor};">${progress}%</div>
+      </div>
+      <div class="timeline-cell">
+        <div class="timeline">
+          <div class="timeline-track"></div>
+          <div class="timeline-progress" style="width:${progress}%; background:${progressColor};"></div>
+          <div class="stages">${stagesHtml}</div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function showError(msg) {
+    document.getElementById('content').innerHTML = `
+      <div class="state error">
+        <div class="state-icon">⚠</div>
+        <div class="state-title">Unable to load data</div>
+        <div class="state-message">${escapeHtml(msg)}<br><br>Please check the Google Apps Script URL configuration, or contact the Research Committee.</div>
+      </div>`;
+  }
+
+  function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+  }
+
+  // ============================================
+  // EVENTS
+  // ============================================
+  document.getElementById('searchInput').addEventListener('input', (e) => {
+    searchQuery = e.target.value.trim();
+    renderCategories();
+  });
+
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+  // ============================================
+  // INIT
+  // ============================================
+  loadData();
+</script>
+
+</body>
+</html>
